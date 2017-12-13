@@ -1,0 +1,29 @@
+body {
+    
+    background: #ffc0cb;
+    text-align: center;
+    font-size: 150%;
+}
+
+h1 {
+  color :#800000;
+
+}
+
+p {
+    color:#800000;
+}
+
+#calculateButton {
+    color: #800000;
+    background-color: #ffcccc;
+}
+
+.responseLine{
+    color: black;
+}
+img {
+    float: center;
+    height: 200px;
+    width: 200px;
+}

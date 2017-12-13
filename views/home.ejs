@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <link rel="stylesheet" href="css/style.css"/> 
+       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <h1> Calculate el AMOR</h1>
+        <form name="loveCalculator">
+            <p>Enter Your Name:<br>
+	        	<input type="text" id="first" name="personOne">
+	        <p>Enter Bae's name:<br>
+	        	<input type="text" id="bae" name="personTwo">
+	         <div class="errorMessage">
+	         	<p id="error"></p>
+	         </div>
+	           
+	         <div class="buttonHolder">
+	         	<input type="button" id="calculateButton" name="clickbtn" value="Calculate" onclick="calculate()">
+	         </div>
+	         <div class="buttonHolder">
+	         	<input type="button" id="calculateButton" name="clickbtn" value="Refresh" onclick="window.location.reload()">
+	         </div>
+	           
+	         <div id="txtresult">
+	           	
+	         </div>
+	       	 <p id="responseLine"> </p>
+	       	 <img id="image-change" src="./cupid.png" />
+	            
+        </form>
+        <script>
+		function calculate(){
+				var fName = document.getElementById('first').value
+				var sName = document.getElementById('bae').value
+				
+			    var error=" "
+			    document.getElementById('error').innerHTML = error
+			    
+			    var percentage = Math.round(Math.random() * 99) + 1;
+			 
+			    var result = fName + " & "  + sName + " are " + percentage + "% compatible."
+			    document.getElementById('txtresult').innerHTML = result;
+			
+			 	document.getElementById("calculateButton").disabled = true;
+			 	var resp = resultList(percentage)
+			 	var url = 'https://api.giphy.com/v1/gifs/search?api_key=Wl4itjHbEZir90MD51WbMfR0aiYDBgfW&q=love&limit=25&offset=0&rating=G&lang=en'
+			 	axios.get(url)
+			 	.then( function(res){ 
+			 		var resultsArray = res.data.data
+			 		var rand = Math.floor(Math.random() * resultsArray.length)
+			 		var randomResult = resultsArray[rand]
+			 		
+			 		var answer = randomResult.images.fixed_width.url
+			 		console.log(answer)
+			 		// var imageUrl = json
+			 		document.getElementById('responseLine').innerHTML = resp
+			 		document.getElementById('image-change').setAttribute('src', answer)
+			 	})
+			 	.catch(function(error){
+			 		console.log(error)
+			 	})
+			}
+			var responseList = [
+	 			"None. None at all.",
+	 			"Not much chemistry.", 
+	 			"Possibly a couple of glances, but nothing to get excited about.",
+				"Starting to show some promise.",
+	 			"You're half way there!",
+	 			"There is a real spark!",
+				"Match made in heaven!",
+				"This is love.",
+	 			"These two need to be together."
+			]
+ 		function resultList(percentage){
+			if (percentage >= 0 && percentage < 20) {
+				return responseList[0]
+			}
+			
+			else if (percentage >= 20 && percentage < 30){
+				//document.getElementById('responseLine').innerHTML = responseList[1]
+				return responseList[1]
+			}
+			
+			else if (percentage >= 30 && percentage < 40){
+				return responseList[2]
+			}
+			
+			else if (percentage >= 40 && percentage < 50){
+				return responseList[3]
+			}
+			
+			else if (percentage >= 50 && percentage < 60){
+				return responseList[4]
+			}
+			
+			else if (percentage >= 60 && percentage < 70){
+				return responseList[5]
+			}
+			
+			else if (percentage >= 70 && percentage < 80){
+				return responseList[6]
+			}
+			
+			else if(percentage >= 80 && percentage < 90){
+				return responseList[7]
+			}
+
+			else { 
+				return responseList[8]
+			}
+ 		}
+     </script>
+    </body>
+</html>
